@@ -3,7 +3,8 @@
 import random
 
 # TODO-1: - Update the word list to use the 'word_list' from hangman_words.py
-from tite import word_list
+from day_7_hangman_words import word_list
+
 # Delete this line: word_list = ["aardvark", "baboon", "camel"]
 chosen_word = random.choice(word_list)
 word_length = len(chosen_word)
