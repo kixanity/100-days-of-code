@@ -19,6 +19,7 @@ print(f'Pssst, the solution is {chosen_word}.')
 
 # Create blanks
 display = []
+already = []
 for _ in range(word_length):
     display += "_"
 
@@ -26,19 +27,26 @@ while not end_of_game:
     guess = input("Guess a letter: ").lower()
 
     # TODO-4: - If the user has entered a letter they've already guessed, print the letter and let them know.
-
+    if guess in display:
+        print(f"{guess} is already guessed.")
     # Check guessed letter
     for position in range(word_length):
         letter = chosen_word[position]
-        print(f"Current position: {position}\n Current letter: {letter}\n Guessed letter: {guess}")
+        # print(f"Current position: {position}\n Current letter: {letter}\n Guessed letter: {guess}")
         if letter == guess:
             display[position] = letter
 
     # Check if user is wrong.
     if guess not in chosen_word:
+        if guess not in already:
+            print(f"{guess} is not in the word.")
+            already.append(guess)
+            lives -= 1
         # TODO-5: - If the letter is not in the chosen_word, print out the letter and let them know it's not in the
         #  word.
-        lives -= 1
+        else:
+            print("You've already guessed that.")
+
         if lives == 0:
             end_of_game = True
             print("You lose.")
@@ -52,4 +60,5 @@ while not end_of_game:
         print("You win.")
 
     # TODO-2: - Import the stages from hangman_art.py and make this error go away.
+    from day_7_hangman_art import stages
     print(stages[lives])
